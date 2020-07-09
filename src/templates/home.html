@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valens Demo</title>
+
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+     <!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<style>
+.btn-list {
+    display:flex;
+    flex-direction: column;
+}
+
+.btn-list > a {
+    margin-top: 0.5em;
+}
+</style>
+
+<body>
+    <div class="row">
+
+        <div class="col s3">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">Filters</div>
+                            <div class="btn-list">
+                                <a href="/" class="btn waves-effect waves-light">All</a>
+                                {% for color in colors %}
+                                    <a href="/{{ color }}" class="btn waves-effect waves-light">{{ color }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">Reorder</div>
+                            <p>Moves the target ID below the other ID.</p>
+                            <form method="post" action="/order">
+                                <div class="input-field">
+                                    <input type="number" name="target-move" id="target-move" required>
+                                    <label for="target-move">Target</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="number" name="to-move" id="to-move" required>
+                                    <label for="to-move">Move to</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="submit" class="btn">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">Delete</div>
+                            <form method="post" action="/delete">
+                                <div class="input-field">
+                                    <input type="number" name="target-delete" id="target-delete" required>
+                                    <label for="target-delete">Target</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="submit" class="btn">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s9">
+            <div class="card">
+                <div class="card-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Car Name</th>
+                                <th>Color</th>
+                            </tr>
+                        </thead>
+                        {% for car in cars %}
+                            <tr>
+                                <td>{{ car.id }}</td>
+                                <td>{{ car.name }}</td>
+                                <td>{{ car.color }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>
